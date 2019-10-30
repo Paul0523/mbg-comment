@@ -27,6 +27,9 @@ public class MySQLCommentGenerator extends EmptyCommentGenerator {
     public void addFieldComment(Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
         // 获取列注释
         String remarks = introspectedColumn.getRemarks();
+        if (null == remarks || "".equals(remarks) || "".equals(remarks.trim())) {
+            return;
+        }
         field.addJavaDocLine("/**");
         field.addJavaDocLine(" * " + remarks);
         field.addJavaDocLine(" */");
